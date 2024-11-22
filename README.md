@@ -1,1 +1,6 @@
-# software-seni-test
+# HOW TO RUN:
+```
+npm i
+
+npx cypress open
+```
