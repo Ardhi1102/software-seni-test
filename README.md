@@ -2,5 +2,5 @@
 ```
 npm i
 
-npx cypress open
+npx run test:headless
 ```
