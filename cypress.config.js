@@ -3,22 +3,22 @@ const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const addCucumberPreprocessorPlugin = require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
 const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
-
 module.exports = defineConfig({
   viewportHeight: 1024,
   viewportWidth: 1280,
   chromeWebSecurity: false,
+  defaultCommandTimeout: 10000, // Set timeout default (opsional)
   e2e: {
+    baseUrl: process.env.CYPRESS_BASE_URL || 'https://www.saucedemo.com', // Tambahkan baseUrl
     setupNodeEvents(on, config) {
-      // implement node event listeners here
       const bundler = createBundler({
-        plugins: [createEsbuildPlugin(config)]
-      })
-      on("file:preprocessor", bundler)
-      addCucumberPreprocessorPlugin(on, config)
+        plugins: [createEsbuildPlugin(config)],
+      });
+      on("file:preprocessor", bundler);
+      addCucumberPreprocessorPlugin(on, config);
 
-      return config
+      return config;
     },
-    specPattern: ["cypress/e2e/*/*", "cypress/e2e/*"]
+    specPattern: ["cypress/e2e/**/*.feature", "cypress/e2e/**/*.cy.{js,ts}"],
   },
 });
