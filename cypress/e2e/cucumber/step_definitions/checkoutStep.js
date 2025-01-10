@@ -1,4 +1,5 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor"
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
 
 Given("User access url", () => {
     cy.visit(Cypress.env("url_link"))
